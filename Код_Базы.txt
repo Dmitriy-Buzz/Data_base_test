@@ -11,27 +11,32 @@ Genre VARCHAR(10)
 
 CREATE TABLE IF NOT EXISTS Alboms (
 id SERIAL PRIMARY KEY,
-Alboms VARCHAR(10),
+Alboms VARCHAR(20),
 Year integer check(Year>0) NOT NULL
-);
-
-CREATE TABLE IF NOT exists Artist_Alboms_Genres (
-artist_id integer references Artist(id),
-alboms integer references Alboms(id),
-genres_id integer references Genres(id),
-constraint pk primary key (Artist_id, Alboms_id,Genres_id)
 );
 
 CREATE TABLE IF NOT EXISTS Tracks (
 id SERIAL PRIMARY KEY,
-Tracks VARCHAR(10),
+Alboms_id integer references Alboms(id),
+Tracks VARCHAR(20),
 Duration integer check(Duration>0) NOT NULL
+);
+
+CREATE TABLE IF NOT exists Artist_Tracks_Genres (
+artist_id integer references Artist(id),
+tracks_id integer references Tracks(id),
+genres_id integer references Genres(id),
+constraint pk primary key (Artist_id, Tracks_id,Genres_id)
 );
 
 CREATE TABLE IF NOT exists Сollection (
 id SERIAL PRIMARY KEY,
-NameCollection VARCHAR(10),
-Year_ integer check(Year_>0) NOT null,
-Alboms_id integer references Alboms(id),
-tracks_id integer references Tracks(id)
+NameCollection VARCHAR(20),
+Year_ integer check(Year_>0) NOT null
+);
+
+CREATE TABLE IF NOT exists Tracks_Collection (
+collection_id integer references Collection(id),
+tracks_id integer references Tracks(id),
+constraint pk primary key (collection_id, tracks_id)
 );
