@@ -35,8 +35,8 @@ NameCollection VARCHAR(20),
 Year_ integer check(Year_>0) NOT null
 );
 
-CREATE TABLE IF NOT exists Tracks_Collection (
+CREATE TABLE IF NOT exists tracol (
 collection_id integer references Collection(id),
 tracks_id integer references Tracks(id),
-constraint pk primary key (collection_id, tracks_id)
+constraint lk primary key (collection_id, tracks_id)
 );
